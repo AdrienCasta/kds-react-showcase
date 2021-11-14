@@ -1,7 +1,7 @@
 export default interface GetBooksResponse {
   count: number;
-  next: string | string;
-  previous: null | string;
+  next: string | null;
+  previous: string | null;
   results: {
     id: number;
     title: string;
