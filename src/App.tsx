@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./style/reset.css";
+
+import Products from "./features/products/Products";
+import useAllProducts from "./features/products/useAllProducts";
+
+const PRODUCTS_BY_PAGE = 5;
 
 function App() {
+  const { data, error, isLoading } = useAllProducts();
+
+  if (error) {
+    return null;
+  }
+  if (isLoading) {
+    return null;
+  }
+
+  console.log(Math.ceil((data || []).length / PRODUCTS_BY_PAGE));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Products />
+      <ul>
+        {Array(Math.ceil((data || []).length / PRODUCTS_BY_PAGE))
+          .fill(null)
+          .map((_, i) => i)
+          .map((i) => {
+            return (
+              <li>
+                <button>{i + 1}</button>
+              </li>
+            );
+          })}
+      </ul>
+    </>
   );
 }
 
