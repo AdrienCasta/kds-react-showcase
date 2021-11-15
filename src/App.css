@@ -1,6 +1,10 @@
 .App {
   padding: 20px;
 }
+.App__bookPagination {
+  display: flex;
+  justify-content: center;
+}
 .parent {
   display: grid;
   grid-gap: 1rem;

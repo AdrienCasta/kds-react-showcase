@@ -1,0 +1,22 @@
+.BookListPagination {
+  display: flex;
+  align-items: center;
+}
+.BookListPagination__item {
+  list-style: none;
+}
+.BookListPagination__item + .BookListPagination__item {
+  margin-left: 10px;
+}
+.BookListPagination__item__button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid #e5e5e5;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.BookListPagination__item__button--active {
+  border-color: #386bce;
+}
