@@ -12,9 +12,6 @@ const BookListPaginationItem = ({ children }: BookListPaginationItemProps) => (
   <li className="BookListPagination__item">{children}</li>
 );
 
-const MAX_PAGINATION_STEP = 11;
-const MAX_PAGINATION_STEP_BETWEEN = Math.floor(MAX_PAGINATION_STEP / 2);
-
 const BookListPagination = ({
   pagination,
   onNextPage,
@@ -38,33 +35,41 @@ const BookListPagination = ({
 
   const isActive = (page: number) => pagination.currentPage === page;
 
-  const pages = [...Array(MAX_PAGINATION_STEP)];
+  const pages = [...Array(6)]
+    .reduce<number[]>((acc, curr, i) => {
+      console.log(acc.length);
 
+      return [
+        ...acc,
+        ...(pagination.currentPage - i > 0 ? [pagination.currentPage - i] : []),
+        ...(pagination.currentPage + i < pagination.pages
+          ? [pagination.currentPage + i + 1]
+          : []),
+      ];
+    }, [])
+    .sort((a, b) => a - b)
+    .slice(0, 7);
+
+  console.log(pages);
   return (
     <ul className="BookListPagination">
       <BookListPaginationItem>
         <button
-          className="BookListPagination__item__button"
+          className={concat(
+            "BookListPagination__item__button",
+            "BookListPagination__item__button--navigation"
+          )}
           disabled={pagination.isFirstPage}
           onClick={handlePreviousClick}
         >
           Previous
         </button>
       </BookListPaginationItem>
-      {pages.map((_, i) => {
-        const page = i + pagination.currentPage - MAX_PAGINATION_STEP_BETWEEN;
+      {pages.map((page) => {
         const isButtonActive = isActive(page);
 
-        if (page <= 0) {
-          return null;
-        }
-
-        if (page > pagination.pages) {
-          return null;
-        }
-
         return (
-          <BookListPaginationItem key={pagination.renderPageKey(i)}>
+          <BookListPaginationItem key={pagination.renderPageKey(page)}>
             <button
               disabled={isButtonActive}
               className={concat(
@@ -80,7 +85,10 @@ const BookListPagination = ({
       })}
       <BookListPaginationItem>
         <button
-          className="BookListPagination__item__button"
+          className={concat(
+            "BookListPagination__item__button",
+            "BookListPagination__item__button--navigation"
+          )}
           disabled={pagination.isLastPage}
           onClick={handleNextClick}
         >
