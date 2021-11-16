@@ -1,0 +1,50 @@
+.BookListItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  height: 300px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.BookListItem__title {
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.BookListItem__cover {
+  max-height: 100px;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  border: none;
+}
+.BookListItem__author {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+.BookListItem__tagList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+.BookListItem__tagListItem {
+  font-size: 11px;
+  list-style: none;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  background-color: #3367cd;
+  color: #fff;
+  padding: 6px;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.BookListItem__tagListItem:not(:last-child) {
+  margin-right: 10px;
+}

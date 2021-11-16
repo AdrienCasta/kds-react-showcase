@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <BookList books={data.books} />
+      {/* <BookList books={data.books} /> */}
       <div className="App__bookPagination">
         <BookListPagination
           pagination={data.pagination}

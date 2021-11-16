@@ -8,12 +8,23 @@ export default class Book {
   title: ApiGetBookResponseResult["title"];
   authors: ApiGetBookResponseResult["authors"];
   languages: ApiGetBookResponseResult["languages"];
+  cover: ApiGetBookResponseResult["formats"]["image/jpeg"];
+  tags: ApiGetBookResponseResult["bookshelves"];
 
-  constructor({ title, authors, languages, id }: ApiGetBookResponseResult) {
+  constructor({
+    title,
+    authors,
+    languages,
+    id,
+    formats,
+    bookshelves,
+  }: ApiGetBookResponseResult) {
     this.id = id;
     this.key = `${title}-${id}`.toLowerCase().split(" ").join("-");
     this.title = title;
     this.authors = authors;
     this.languages = languages;
+    this.cover = formats["image/jpeg"];
+    this.tags = bookshelves;
   }
 }
