@@ -7,24 +7,24 @@ export default interface GetBooksResponse {
     title: string;
     authors: {
       name: string;
-      birth_year: number;
-      death_year: number;
+      birth_year: number | null;
+      death_year: number | null;
     }[];
-    translators: [];
+    translators: [] | string[];
     subjects: string[];
     bookshelves: string[];
     languages: string[];
     copyright: boolean;
     media_type: string;
     formats: {
-      "application/epub+zip": string;
-      "application/rdf+xml": string;
-      "application/x-mobipocket-ebook": string;
-      "application/zip": string;
-      "text/plain; charset=utf-8": string;
-      "text/html; charset=utf-8": string;
-      "image/jpeg": string;
-      "text/html": string;
+      "application/epub+zip"?: string;
+      "application/rdf+xml"?: string;
+      "application/x-mobipocket-ebook"?: string;
+      "application/zip"?: string;
+      "text/plain; charset=utf-8"?: string;
+      "text/html; charset=utf-8"?: string;
+      "image/jpeg"?: string;
+      "text/html"?: string;
     };
     download_count: number;
   }[];
