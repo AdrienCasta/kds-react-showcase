@@ -1,16 +1,37 @@
-.App {
+.App__bookDetails {
+  height: 100%;
+  width: 30%;
+  position: fixed;
+  transform: translate3d(-100%, 0, 0);
+  background-color: #eee;
+  top: 0;
+  transition: 0.3s transform;
+  padding: 10px;
+}
+.App__bookDetails--open {
+  transform: translate3d(0, 0, 0);
+}
+.App__bookDetails__list {
+  list-style: none;
+  padding: 0;
+}
+.App__bookDetails__list__item {
+  display: flex;
+}
+.App__bookDetails__list > * {
+  font-family: "Poppins";
+}
+.App__bookDetails__title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.App_bookList {
   padding: 20px;
+}
+.App_bookList--no-pointer > * {
+  pointer-events: none;
 }
 .App__bookPagination {
   display: flex;
   justify-content: center;
-}
-.parent {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.child {
-  border: 1px solid red;
 }

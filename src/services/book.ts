@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Book from "../models/Book";
 import Pagination from "../models/Pagination";
+import GetBookResponse from "./types/GetBookResponse";
 import GetBooksResponse from "./types/GetBooksResponse";
 
 export const bookApi = createApi({
@@ -10,7 +11,7 @@ export const bookApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query<{ books: Book[]; pagination: Pagination }, string>({
       query: (page: string) => `books?page=${page}`,
-      transformResponse: (response: GetBooksResponse, d) => {
+      transformResponse: (response: GetBooksResponse) => {
         const books = response.results.map((book) => new Book(book));
         const pagination = new Pagination(response);
         return {
@@ -19,9 +20,16 @@ export const bookApi = createApi({
         };
       },
     }),
+    getBook: builder.query<{ book: Book }, string>({
+      query: (id: string) => `books/${id}`,
+      transformResponse: (response: GetBookResponse) => {
+        return { book: new Book(response) };
+      },
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetBooksQuery, useLazyGetBooksQuery } = bookApi;
+export const { useGetBooksQuery, useLazyGetBooksQuery, useLazyGetBookQuery } =
+  bookApi;

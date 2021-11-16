@@ -1,15 +1,16 @@
+import GetBookResponse from "../services/types/GetBookResponse";
 import GetBooksResponse from "../services/types/GetBooksResponse";
 
-type ApiGetBookResponseResult = GetBooksResponse["results"][0];
+type ApiGetBook = GetBooksResponse["results"][0] | GetBookResponse;
 
 export default class Book {
   key: string;
-  id: ApiGetBookResponseResult["id"];
-  title: ApiGetBookResponseResult["title"];
-  authors: ApiGetBookResponseResult["authors"];
-  languages: ApiGetBookResponseResult["languages"];
-  cover: ApiGetBookResponseResult["formats"]["image/jpeg"];
-  tags: ApiGetBookResponseResult["bookshelves"];
+  id: ApiGetBook["id"];
+  title: ApiGetBook["title"];
+  authors: ApiGetBook["authors"];
+  languages: ApiGetBook["languages"];
+  cover: ApiGetBook["formats"]["image/jpeg"];
+  tags: ApiGetBook["bookshelves"];
 
   constructor({
     title,
@@ -18,7 +19,7 @@ export default class Book {
     id,
     formats,
     bookshelves,
-  }: ApiGetBookResponseResult) {
+  }: ApiGetBook) {
     this.id = id;
     this.key = `${title}-${id}`.toLowerCase().split(" ").join("-");
     this.title = title;
@@ -26,5 +27,18 @@ export default class Book {
     this.languages = languages;
     this.cover = formats["image/jpeg"];
     this.tags = bookshelves;
+  }
+
+  get authorsEpitaph() {
+    return this.authors
+      .map(
+        ({ name, birth_year, death_year }) =>
+          `${name} (${birth_year} - ${death_year})`
+      )
+      .join(", ");
+  }
+
+  get coverAltAttribute() {
+    return `Couverture du livre ${this.title}`;
   }
 }
