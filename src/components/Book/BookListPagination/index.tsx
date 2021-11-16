@@ -12,6 +12,8 @@ const BookListPaginationItem = ({ children }: BookListPaginationItemProps) => (
   <li className="BookListPagination__item">{children}</li>
 );
 
+const PAGINATION_STEPS = 4;
+
 const BookListPagination = ({
   pagination,
   onNextPage,
@@ -35,10 +37,11 @@ const BookListPagination = ({
 
   const isActive = (page: number) => pagination.currentPage === page;
 
-  const pages = [...Array(6)]
+  const pages = [...Array(PAGINATION_STEPS)]
     .reduce<number[]>((acc, curr, i) => {
-      console.log(acc.length);
-
+      if (acc.length >= PAGINATION_STEPS) {
+        return acc;
+      }
       return [
         ...acc,
         ...(pagination.currentPage - i > 0 ? [pagination.currentPage - i] : []),
@@ -47,10 +50,8 @@ const BookListPagination = ({
           : []),
       ];
     }, [])
-    .sort((a, b) => a - b)
-    .slice(0, 7);
+    .sort((a, b) => a - b);
 
-  console.log(pages);
   return (
     <ul className="BookListPagination">
       <BookListPaginationItem>
