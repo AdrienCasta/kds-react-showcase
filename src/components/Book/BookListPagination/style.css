@@ -16,6 +16,17 @@
   border-radius: 4px;
   font-weight: 700;
   font-size: 18px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+}
+.BookListPagination__item__button--navigation {
+  width: 100px;
+  height: initial;
 }
 .BookListPagination__item__button--active {
   border-color: #386bce;
