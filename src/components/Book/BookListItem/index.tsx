@@ -34,4 +34,4 @@ const BookListItem = ({ book }: BookListItemProps) => {
   );
 };
 
-export default BookListItem;
+export default React.memo(BookListItem);
